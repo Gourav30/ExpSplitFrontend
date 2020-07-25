@@ -4975,23 +4975,20 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 
       this.setUserInfoInLocalStorage = function (data) {
-        localStorage.setItem('userInfo', JSON.stringify(data));
-        console.log(_this9.setUserInfoInLocalStorage);
+        localStorage.setItem('userInfo', JSON.stringify(data)); //console.log(this.setUserInfoInLocalStorage)
       }; //signup code start
 
 
       this.signupfunction = function (data) {
         var params = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpParams"]().set("firstName", data.firstName).set("lastName", data.lastName) // .set('userName', data.userName)
-        .set("countryCode", data.countryCode).set("mobileNumber", data.mobileNumber).set("email", data.email).set("password", data.password); //return this.http.post(`${this.baseurl}/signup`, params);
-
+        .set("countryCode", data.countryCode).set("mobileNumber", data.mobileNumber).set("email", data.email).set("password", data.password);
         return _this9.http.post("".concat(_this9.baseurl, "/signup"), params);
       }; //signup code end
       //login code start
 
 
       this.signinfunction = function (data) {
-        var params = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpParams"]().set('email', data.email).set('password', data.password); //return this.http.post(`${this.baseurl}/login`, params);
-
+        var params = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpParams"]().set('email', data.email).set('password', data.password);
         return _this9.http.post("".concat(_this9.baseurl, "/login"), params);
       }; //login code end
       //send reset token code start

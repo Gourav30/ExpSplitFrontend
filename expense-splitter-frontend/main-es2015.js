@@ -2575,7 +2575,7 @@ class UserHttpService {
         }; // end getUserInfoFromLocalstorage
         this.setUserInfoInLocalStorage = (data) => {
             localStorage.setItem('userInfo', JSON.stringify(data));
-            console.log(this.setUserInfoInLocalStorage);
+            //console.log(this.setUserInfoInLocalStorage)
         };
         //signup code start
         this.signupfunction = (data) => {
@@ -2587,7 +2587,6 @@ class UserHttpService {
                 .set("mobileNumber", data.mobileNumber)
                 .set("email", data.email)
                 .set("password", data.password);
-            //return this.http.post(`${this.baseurl}/signup`, params);
             return this.http.post(`${this.baseurl}/signup`, params);
         };
         //signup code end
@@ -2596,7 +2595,6 @@ class UserHttpService {
             let params = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpParams"]()
                 .set('email', data.email)
                 .set('password', data.password);
-            //return this.http.post(`${this.baseurl}/login`, params);
             return this.http.post(`${this.baseurl}/login`, params);
         };
         //login code end
