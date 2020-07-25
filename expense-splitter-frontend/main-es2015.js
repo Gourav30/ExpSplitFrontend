@@ -2869,7 +2869,7 @@ class LoginComponent {
                         console.log(result);
                         this.toastr.success(result.message);
                         console.log(result.data);
-                        ng2_cookies_ng2_cookies__WEBPACK_IMPORTED_MODULE_1__["Cookie"].set('authToken', result.data.authToken);
+                        ng2_cookies_ng2_cookies__WEBPACK_IMPORTED_MODULE_1__["Cookie"].set('authToken', result.data.userDetails.authToken);
                         ng2_cookies_ng2_cookies__WEBPACK_IMPORTED_MODULE_1__["Cookie"].set('userId', result.data.userDetails.userId);
                         ng2_cookies_ng2_cookies__WEBPACK_IMPORTED_MODULE_1__["Cookie"].set('_id', result.data.userDetails._id);
                         ng2_cookies_ng2_cookies__WEBPACK_IMPORTED_MODULE_1__["Cookie"].set('userName', result.data.userDetails.firstName + ' ' + result.data.userDetails.lastName);
