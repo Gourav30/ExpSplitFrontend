@@ -606,8 +606,8 @@ __webpack_require__.r(__webpack_exports__);
 class ExpenseHttpService {
     constructor(http) {
         this.http = http;
-        this.baseurl = 'http://localhost:3000/api/v1/expenses';
-        //public baseurl = 'http://api.gourav.tech/api/v1/expenses';
+        //public baseurl ='http://localhost:3000/api/v1/expenses';
+        this.baseurl = 'http://api.gourav.tech/api/v1/expenses';
         this.authToken = ng2_cookies_ng2_cookies__WEBPACK_IMPORTED_MODULE_2__["Cookie"].get('authToken');
     }
     /**
@@ -647,6 +647,7 @@ class ExpenseHttpService {
             .set('expenseTitle', data.expenseTitle)
             .set('expenseDescription', data.expenseDescription)
             .set('expenseAmount', data.expenseAmount)
+            .set('createdBy', data.createdBy)
             .set('paidBy', paidByArray)
             .set('usersInvolved', usersInvolvedArray);
         return this.http.put(`${this.baseurl}/${data.expenseId}/updateExpense?authToken=${this.authToken}`, params);
@@ -1640,8 +1641,8 @@ __webpack_require__.r(__webpack_exports__);
 class GroupHttpService {
     constructor(http) {
         this.http = http;
-        this.baseurl = 'http://localhost:3000/api/v1/groups';
-        //public baseurl = 'http://api.gourav.tech/api/v1/groups';
+        //public baseurl ='http://localhost:3000/api/v1/groups';
+        this.baseurl = 'http://api.gourav.tech/api/v1/groups';
         this.authToken = ng2_cookies_ng2_cookies__WEBPACK_IMPORTED_MODULE_2__["Cookie"].get('authToken');
     }
     getSingleGroupDetails(groupId) {
@@ -2530,8 +2531,8 @@ class SocketService {
                 this.toastr.show(`${data.adminName} terminated your expense with expenseId:${data.expenseId}`);
             });
         };
-        this.baseUrl = 'http://localhost:3000';
-        //this.baseUrl = 'http://api.gourav.tech';
+        //this.baseUrl = 'http://localhost:3000';
+        this.baseUrl = 'http://api.gourav.tech';
         this.socket = socket_io_client__WEBPACK_IMPORTED_MODULE_2___default()(this.baseUrl);
     }
 }
@@ -2566,8 +2567,8 @@ __webpack_require__.r(__webpack_exports__);
 class UserHttpService {
     constructor(http) {
         this.http = http;
-        this.baseurl = 'http://localhost:3000/api/v1/users';
-        //public baseurl = 'http://api.gourav.tech/api/v1/users';
+        //public baseurl ='http://localhost:3000/api/v1/users';
+        this.baseurl = 'http://api.gourav.tech/api/v1/users';
         this.authToken = ng2_cookies_ng2_cookies__WEBPACK_IMPORTED_MODULE_2__["Cookie"].get('authToken');
         this.getUserInfoFromLocalstorage = () => {
             return JSON.parse(localStorage.getItem('userInfo'));

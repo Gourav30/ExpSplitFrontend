@@ -1147,9 +1147,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       function ExpenseHttpService(http) {
         _classCallCheck(this, ExpenseHttpService);
 
-        this.http = http;
-        this.baseurl = 'http://localhost:3000/api/v1/expenses'; //public baseurl = 'http://api.gourav.tech/api/v1/expenses';
+        this.http = http; //public baseurl ='http://localhost:3000/api/v1/expenses';
 
+        this.baseurl = 'http://api.gourav.tech/api/v1/expenses';
         this.authToken = ng2_cookies_ng2_cookies__WEBPACK_IMPORTED_MODULE_2__["Cookie"].get('authToken');
       }
       /**
@@ -1190,7 +1190,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           var paidByArray = JSON.stringify(data.paidBy);
           var usersInvolvedArray = JSON.stringify(data.usersInvolved);
           console.log('update data:Ok' + JSON.stringify(data));
-          var params = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpParams"]().set('expenseTitle', data.expenseTitle).set('expenseDescription', data.expenseDescription).set('expenseAmount', data.expenseAmount).set('paidBy', paidByArray).set('usersInvolved', usersInvolvedArray);
+          var params = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpParams"]().set('expenseTitle', data.expenseTitle).set('expenseDescription', data.expenseDescription).set('expenseAmount', data.expenseAmount).set('createdBy', data.createdBy).set('paidBy', paidByArray).set('usersInvolved', usersInvolvedArray);
           return this.http.put("".concat(this.baseurl, "/").concat(data.expenseId, "/updateExpense?authToken=").concat(this.authToken), params);
         }
       }, {
@@ -3164,9 +3164,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       function GroupHttpService(http) {
         _classCallCheck(this, GroupHttpService);
 
-        this.http = http;
-        this.baseurl = 'http://localhost:3000/api/v1/groups'; //public baseurl = 'http://api.gourav.tech/api/v1/groups';
+        this.http = http; //public baseurl ='http://localhost:3000/api/v1/groups';
 
+        this.baseurl = 'http://api.gourav.tech/api/v1/groups';
         this.authToken = ng2_cookies_ng2_cookies__WEBPACK_IMPORTED_MODULE_2__["Cookie"].get('authToken');
       }
 
@@ -4887,10 +4887,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
           _this8.toastr.show("".concat(data.adminName, " terminated your expense with expenseId:").concat(data.expenseId));
         });
-      };
+      }; //this.baseUrl = 'http://localhost:3000';
 
-      this.baseUrl = 'http://localhost:3000'; //this.baseUrl = 'http://api.gourav.tech';
 
+      this.baseUrl = 'http://api.gourav.tech';
       this.socket = socket_io_client__WEBPACK_IMPORTED_MODULE_2___default()(this.baseUrl);
     };
 
@@ -4964,9 +4964,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
       _classCallCheck(this, UserHttpService);
 
-      this.http = http;
-      this.baseurl = 'http://localhost:3000/api/v1/users'; //public baseurl = 'http://api.gourav.tech/api/v1/users';
+      this.http = http; //public baseurl ='http://localhost:3000/api/v1/users';
 
+      this.baseurl = 'http://api.gourav.tech/api/v1/users';
       this.authToken = ng2_cookies_ng2_cookies__WEBPACK_IMPORTED_MODULE_2__["Cookie"].get('authToken');
 
       this.getUserInfoFromLocalstorage = function () {
