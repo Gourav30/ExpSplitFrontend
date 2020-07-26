@@ -925,7 +925,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
         this.getUserOutstandingLent = function () {
           _this.expenseHttpService.getUserOutstandingLent(_this.user_Id).subscribe(function (apiResponse) {
-            console.log('apiResponse: ' + JSON.stringify(apiResponse.data.totalAmountSpent));
+            //console.log('apiResponse: ' + JSON.stringify(apiResponse.data.totalAmountSpent) );
             var totalAmountLent1 = apiResponse.data[0].totalAmountLent;
             _this.totalAmountLent = Math.round(totalAmountLent1);
 
@@ -935,7 +935,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
         this.getUserOutstandingSpent = function (totalAmountLent) {
           _this.expenseHttpService.getUserOutstandingSpent(_this.user_Id).subscribe(function (apiResponse) {
-            console.log('apiResponse: ' + apiResponse.data.totalAmountSpent);
+            //console.log('apiResponse: ' + apiResponse.data.totalAmountSpent);
             var totalAmountSpent1 = apiResponse.data[0].totalAmountSpent;
             _this.totalAmountSpent = Math.round(totalAmountSpent1);
 

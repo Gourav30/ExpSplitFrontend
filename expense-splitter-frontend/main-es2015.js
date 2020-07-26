@@ -489,7 +489,7 @@ class UserdashboardComponent {
         this.count = 10;
         this.getUserOutstandingLent = () => {
             this.expenseHttpService.getUserOutstandingLent(this.user_Id).subscribe((apiResponse) => {
-                console.log('apiResponse: ' + JSON.stringify(apiResponse.data.totalAmountSpent));
+                //console.log('apiResponse: ' + JSON.stringify(apiResponse.data.totalAmountSpent) );
                 let totalAmountLent1 = apiResponse.data[0].totalAmountLent;
                 this.totalAmountLent = Math.round(totalAmountLent1);
                 this.getUserOutstandingSpent(this.totalAmountLent);
@@ -497,7 +497,7 @@ class UserdashboardComponent {
         };
         this.getUserOutstandingSpent = (totalAmountLent) => {
             this.expenseHttpService.getUserOutstandingSpent(this.user_Id).subscribe((apiResponse) => {
-                console.log('apiResponse: ' + apiResponse.data.totalAmountSpent);
+                //console.log('apiResponse: ' + apiResponse.data.totalAmountSpent);
                 let totalAmountSpent1 = apiResponse.data[0].totalAmountSpent;
                 this.totalAmountSpent = Math.round(totalAmountSpent1);
                 this.getUserOutstandingBalance(totalAmountLent, this.totalAmountSpent);
