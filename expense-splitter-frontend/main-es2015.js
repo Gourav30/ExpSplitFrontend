@@ -2283,6 +2283,8 @@ class LayoutComponent {
         this.toastr = toastr;
         //logout code start
         this.logout = () => {
+            // remove user from local storage and set current user to null
+            localStorage.removeItem('user');
             ng2_cookies__WEBPACK_IMPORTED_MODULE_1__["Cookie"].delete('authToken');
             ng2_cookies__WEBPACK_IMPORTED_MODULE_1__["Cookie"].delete('_id');
             ng2_cookies__WEBPACK_IMPORTED_MODULE_1__["Cookie"].delete('userId');
@@ -2572,8 +2574,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/http.js");
 /* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm2015/index.js");
-/* harmony import */ var ng2_cookies_ng2_cookies__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ng2-cookies/ng2-cookies */ "./node_modules/ng2-cookies/ng2-cookies.js");
-/* harmony import */ var ng2_cookies_ng2_cookies__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(ng2_cookies_ng2_cookies__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm2015/operators/index.js");
+/* harmony import */ var ng2_cookies_ng2_cookies__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ng2-cookies/ng2-cookies */ "./node_modules/ng2-cookies/ng2-cookies.js");
+/* harmony import */ var ng2_cookies_ng2_cookies__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(ng2_cookies_ng2_cookies__WEBPACK_IMPORTED_MODULE_4__);
+
 
 
 
@@ -2585,7 +2589,7 @@ class UserHttpService {
         this.http = http;
         //public baseurl ='http://localhost:3000/api/v1/users';
         this.baseurl = 'http://api.gourav.tech/api/v1/users';
-        this.authToken = ng2_cookies_ng2_cookies__WEBPACK_IMPORTED_MODULE_3__["Cookie"].get('authToken');
+        this.authToken = ng2_cookies_ng2_cookies__WEBPACK_IMPORTED_MODULE_4__["Cookie"].get('authToken');
         this.getUserInfoFromLocalstorage = () => {
             return JSON.parse(localStorage.getItem('userInfo'));
         }; // end getUserInfoFromLocalstorage
@@ -2611,7 +2615,13 @@ class UserHttpService {
             let params = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpParams"]()
                 .set('email', data.email)
                 .set('password', data.password);
-            return this.http.post(`${this.baseurl}/login`, params);
+            return this.http.post(`${this.baseurl}/login`, params)
+                .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(userInfo => {
+                // store user details and jwt token in local storage to keep user logged in between page refreshes
+                localStorage.setItem('userInfo', JSON.stringify(userInfo));
+                this.userSubject.next(userInfo);
+                return userInfo;
+            }));
         };
         //login code end
         //send reset token code start
@@ -2619,25 +2629,22 @@ class UserHttpService {
             let params = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpParams"]()
                 .set('email', email);
             return this.http.post(`${this.baseurl}/forgotPassword`, params);
-        };
-        //send reset token code end
+        }; //send reset token code end
         //reset password code start
         this.resetPassword = (data) => {
             let params = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpParams"]()
                 .set('password', data.password)
                 .set('resetPasswordToken', data.resetPasswordToken);
             return this.http.post(`${this.baseurl}/resetPassword`, params);
-        };
-        //reset password code end
+        }; //reset password code end
         //get all Users code start
         this.getAllUsers = () => {
             return this.http.get(`${this.baseurl}/view/all?authToken=${this.authToken}`);
-        };
-        //get all Users code end
+        }; //get all Users code end
         // get single user details
         this.getSingleUser = (userId) => {
             return this.http.get(`${this.baseurl}/${userId}/details?authToken=${this.authToken}`);
-        };
+        }; //end get single user details
         this.userSubject = new rxjs__WEBPACK_IMPORTED_MODULE_2__["BehaviorSubject"](JSON.parse(localStorage.getItem('userInfo')));
         this.user = this.userSubject.asObservable();
     }

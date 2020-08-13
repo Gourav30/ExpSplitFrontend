@@ -4444,6 +4444,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         this.toastr = toastr; //logout code start
 
         this.logout = function () {
+          // remove user from local storage and set current user to null
+          localStorage.removeItem('user');
           ng2_cookies__WEBPACK_IMPORTED_MODULE_1__["Cookie"]["delete"]('authToken');
           ng2_cookies__WEBPACK_IMPORTED_MODULE_1__["Cookie"]["delete"]('_id');
           ng2_cookies__WEBPACK_IMPORTED_MODULE_1__["Cookie"]["delete"]('userId');
@@ -4984,13 +4986,19 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony import */
 
 
-    var ng2_cookies_ng2_cookies__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+    var rxjs_operators__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+    /*! rxjs/operators */
+    "./node_modules/rxjs/_esm2015/operators/index.js");
+    /* harmony import */
+
+
+    var ng2_cookies_ng2_cookies__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
     /*! ng2-cookies/ng2-cookies */
     "./node_modules/ng2-cookies/ng2-cookies.js");
     /* harmony import */
 
 
-    var ng2_cookies_ng2_cookies__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(ng2_cookies_ng2_cookies__WEBPACK_IMPORTED_MODULE_3__);
+    var ng2_cookies_ng2_cookies__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(ng2_cookies_ng2_cookies__WEBPACK_IMPORTED_MODULE_4__);
 
     var UserHttpService = /*#__PURE__*/function () {
       function UserHttpService(http) {
@@ -5001,7 +5009,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         this.http = http; //public baseurl ='http://localhost:3000/api/v1/users';
 
         this.baseurl = 'http://api.gourav.tech/api/v1/users';
-        this.authToken = ng2_cookies_ng2_cookies__WEBPACK_IMPORTED_MODULE_3__["Cookie"].get('authToken');
+        this.authToken = ng2_cookies_ng2_cookies__WEBPACK_IMPORTED_MODULE_4__["Cookie"].get('authToken');
 
         this.getUserInfoFromLocalstorage = function () {
           return JSON.parse(localStorage.getItem('userInfo'));
@@ -5023,7 +5031,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
         this.signinfunction = function (data) {
           var params = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpParams"]().set('email', data.email).set('password', data.password);
-          return _this9.http.post("".concat(_this9.baseurl, "/login"), params);
+          return _this9.http.post("".concat(_this9.baseurl, "/login"), params).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (userInfo) {
+            // store user details and jwt token in local storage to keep user logged in between page refreshes
+            localStorage.setItem('userInfo', JSON.stringify(userInfo));
+
+            _this9.userSubject.next(userInfo);
+
+            return userInfo;
+          }));
         }; //login code end
         //send reset token code start
 
@@ -5050,7 +5065,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
         this.getSingleUser = function (userId) {
           return _this9.http.get("".concat(_this9.baseurl, "/").concat(userId, "/details?authToken=").concat(_this9.authToken));
-        };
+        }; //end get single user details
+
 
         this.userSubject = new rxjs__WEBPACK_IMPORTED_MODULE_2__["BehaviorSubject"](JSON.parse(localStorage.getItem('userInfo')));
         this.user = this.userSubject.asObservable();
