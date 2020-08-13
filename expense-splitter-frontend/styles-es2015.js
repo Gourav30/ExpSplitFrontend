@@ -632,13 +632,13 @@ module.exports = exported;
 
 /***/ 4:
 /*!******************************************************************************************************************************************************************************************************************************************************!*\
-  !*** multi ./node_modules/bootstrap/dist/css/bootstrap.min.css ./node_modules/ngx-toastr/toastr.css ./node_modules/@fortawesome/fontawesome-free/css/all.css ./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css ./src/styles.css ***!
+  !*** multi ./node_modules/ngx-toastr/toastr.css ./node_modules/bootstrap/dist/css/bootstrap.min.css ./node_modules/@fortawesome/fontawesome-free/css/all.css ./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css ./src/styles.css ***!
   \******************************************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! E:\working\Live Project\expense-splitter-frontend\node_modules\bootstrap\dist\css\bootstrap.min.css */"./node_modules/bootstrap/dist/css/bootstrap.min.css");
 __webpack_require__(/*! E:\working\Live Project\expense-splitter-frontend\node_modules\ngx-toastr\toastr.css */"./node_modules/ngx-toastr/toastr.css");
+__webpack_require__(/*! E:\working\Live Project\expense-splitter-frontend\node_modules\bootstrap\dist\css\bootstrap.min.css */"./node_modules/bootstrap/dist/css/bootstrap.min.css");
 __webpack_require__(/*! E:\working\Live Project\expense-splitter-frontend\node_modules\@fortawesome\fontawesome-free\css\all.css */"./node_modules/@fortawesome/fontawesome-free/css/all.css");
 __webpack_require__(/*! E:\working\Live Project\expense-splitter-frontend\node_modules\@angular\material\prebuilt-themes\deeppurple-amber.css */"./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css");
 module.exports = __webpack_require__(/*! E:\working\Live Project\expense-splitter-frontend\src\styles.css */"./src/styles.css");
