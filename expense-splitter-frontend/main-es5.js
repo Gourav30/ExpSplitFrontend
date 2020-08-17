@@ -1147,9 +1147,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       function ExpenseHttpService(http) {
         _classCallCheck(this, ExpenseHttpService);
 
-        this.http = http; //public baseurl ='http://localhost:3000/api/v1/expenses';
+        this.http = http;
+        this.baseurl = 'http://localhost:3000/api/v1/expenses'; //public baseurl = 'http://api.gourav.tech/api/v1/expenses';
 
-        this.baseurl = 'http://api.gourav.tech/api/v1/expenses';
         this.authToken = ng2_cookies_ng2_cookies__WEBPACK_IMPORTED_MODULE_2__["Cookie"].get('authToken');
       }
       /**
@@ -1179,7 +1179,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         value: function createExpense(data) {
           var paidByArray = JSON.stringify(data.paidBy);
           var usersInvolvedArray = JSON.stringify(data.usersInvolved);
-          var params = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpParams"]().set('groupId', data.groupId).set('expenseTitle', data.expenseTitle).set('expenseDescription', data.expenseDescription).set('expenseAmount', data.expenseAmount).set('createdBy', data.createdBy).set('paidBy', paidByArray).set('usersInvolved', usersInvolvedArray);
+          var params = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpParams"]().set('groupId', data.groupId).set('expenseTitle', data.expenseTitle).set('expenseDescription', data.expenseDescription).set('expenseAmount', data.expenseAmount).set('createdBy', data.createdBy).set('updatedBy', data.updatedBy).set('paidBy', paidByArray).set('usersInvolved', usersInvolvedArray);
           console.log(params); // console.log('data.users ' + data.users);
 
           return this.http.post("".concat(this.baseurl, "/createExpense?authToken=").concat(this.authToken), params);
@@ -1190,7 +1190,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           var paidByArray = JSON.stringify(data.paidBy);
           var usersInvolvedArray = JSON.stringify(data.usersInvolved);
           console.log('update data:Ok' + JSON.stringify(data));
-          var params = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpParams"]().set('expenseTitle', data.expenseTitle).set('expenseDescription', data.expenseDescription).set('expenseAmount', data.expenseAmount).set('createdBy', data.createdBy).set('paidBy', paidByArray).set('usersInvolved', usersInvolvedArray);
+          var params = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpParams"]().set('expenseTitle', data.expenseTitle).set('expenseDescription', data.expenseDescription).set('expenseAmount', data.expenseAmount).set('createdBy', data.createdBy).set('updatedBy', data.updatedBy).set('paidBy', paidByArray).set('usersInvolved', usersInvolvedArray);
           return this.http.put("".concat(this.baseurl, "/").concat(data.expenseId, "/updateExpense?authToken=").concat(this.authToken), params);
         }
       }, {
@@ -1510,6 +1510,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 
         this.createExpense = function () {
+          debugger;
           console.log(_this2.paidBySelectedUsers, _this2.usersInvolvedSelected);
           var noOfPaidUsers = _this2.paidBySelectedUsers.length;
           _this2.amountLent = _this2.expenseAmount / noOfPaidUsers;
@@ -2324,6 +2325,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       _createClass(EditExpenseComponent, [{
         key: "ngOnInit",
         value: function ngOnInit() {
+          debugger;
           this.userId = ng2_cookies_ng2_cookies__WEBPACK_IMPORTED_MODULE_1__["Cookie"].get('userId');
           this.updatedBy = ng2_cookies_ng2_cookies__WEBPACK_IMPORTED_MODULE_1__["Cookie"].get('userId');
           this.expenseId = this._route.snapshot.paramMap.get('expenseId');
@@ -3168,9 +3170,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       function GroupHttpService(http) {
         _classCallCheck(this, GroupHttpService);
 
-        this.http = http; //public baseurl ='http://localhost:3000/api/v1/groups';
+        this.http = http;
+        this.baseurl = 'http://localhost:3000/api/v1/groups'; //public baseurl = 'http://api.gourav.tech/api/v1/groups';
 
-        this.baseurl = 'http://api.gourav.tech/api/v1/groups';
         this.authToken = ng2_cookies_ng2_cookies__WEBPACK_IMPORTED_MODULE_2__["Cookie"].get('authToken');
       }
 
@@ -4445,7 +4447,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
         this.logout = function () {
           // remove user from local storage and set current user to null
-          localStorage.removeItem('user');
+          localStorage.removeItem('userInfo');
           ng2_cookies__WEBPACK_IMPORTED_MODULE_1__["Cookie"]["delete"]('authToken');
           ng2_cookies__WEBPACK_IMPORTED_MODULE_1__["Cookie"]["delete"]('_id');
           ng2_cookies__WEBPACK_IMPORTED_MODULE_1__["Cookie"]["delete"]('userId');
@@ -4916,10 +4918,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
           _this8.toastr.show("".concat(data.adminName, " terminated your expense with expenseId:").concat(data.expenseId));
         });
-      }; //this.baseUrl = 'http://localhost:3000';
+      };
 
+      this.baseUrl = 'http://localhost:3000'; //this.baseUrl = 'http://api.gourav.tech';
 
-      this.baseUrl = 'http://api.gourav.tech';
       this.socket = socket_io_client__WEBPACK_IMPORTED_MODULE_2___default()(this.baseUrl);
     };
 
@@ -5006,9 +5008,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
         _classCallCheck(this, UserHttpService);
 
-        this.http = http; //public baseurl ='http://localhost:3000/api/v1/users';
+        this.http = http;
+        this.baseurl = 'http://localhost:3000/api/v1/users'; //public baseurl = 'http://api.gourav.tech/api/v1/users';
 
-        this.baseurl = 'http://api.gourav.tech/api/v1/users';
         this.authToken = ng2_cookies_ng2_cookies__WEBPACK_IMPORTED_MODULE_4__["Cookie"].get('authToken');
 
         this.getUserInfoFromLocalstorage = function () {
@@ -5075,6 +5077,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       _createClass(UserHttpService, [{
         key: "userValue",
         get: function get() {
+          this.userSubject = new rxjs__WEBPACK_IMPORTED_MODULE_2__["BehaviorSubject"](JSON.parse(localStorage.getItem('userInfo')));
+          this.user = this.userSubject.asObservable();
           return this.userSubject.value;
         }
       }]);

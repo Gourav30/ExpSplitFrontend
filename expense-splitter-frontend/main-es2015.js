@@ -606,8 +606,8 @@ __webpack_require__.r(__webpack_exports__);
 class ExpenseHttpService {
     constructor(http) {
         this.http = http;
-        //public baseurl ='http://localhost:3000/api/v1/expenses';
-        this.baseurl = 'http://api.gourav.tech/api/v1/expenses';
+        this.baseurl = 'http://localhost:3000/api/v1/expenses';
+        //public baseurl = 'http://api.gourav.tech/api/v1/expenses';
         this.authToken = ng2_cookies_ng2_cookies__WEBPACK_IMPORTED_MODULE_2__["Cookie"].get('authToken');
     }
     /**
@@ -633,6 +633,7 @@ class ExpenseHttpService {
             .set('expenseDescription', data.expenseDescription)
             .set('expenseAmount', data.expenseAmount)
             .set('createdBy', data.createdBy)
+            .set('updatedBy', data.updatedBy)
             .set('paidBy', paidByArray)
             .set('usersInvolved', usersInvolvedArray);
         console.log(params);
@@ -648,6 +649,7 @@ class ExpenseHttpService {
             .set('expenseDescription', data.expenseDescription)
             .set('expenseAmount', data.expenseAmount)
             .set('createdBy', data.createdBy)
+            .set('updatedBy', data.updatedBy)
             .set('paidBy', paidByArray)
             .set('usersInvolved', usersInvolvedArray);
         return this.http.put(`${this.baseurl}/${data.expenseId}/updateExpense?authToken=${this.authToken}`, params);
@@ -803,6 +805,7 @@ class AddexpenseComponent {
         };
         // create expense code start
         this.createExpense = () => {
+            debugger;
             console.log(this.paidBySelectedUsers, this.usersInvolvedSelected);
             let noOfPaidUsers = this.paidBySelectedUsers.length;
             this.amountLent = this.expenseAmount / noOfPaidUsers;
@@ -1208,6 +1211,7 @@ class EditExpenseComponent {
         };
     }
     ngOnInit() {
+        debugger;
         this.userId = ng2_cookies_ng2_cookies__WEBPACK_IMPORTED_MODULE_1__["Cookie"].get('userId');
         this.updatedBy = ng2_cookies_ng2_cookies__WEBPACK_IMPORTED_MODULE_1__["Cookie"].get('userId');
         this.expenseId = this._route.snapshot.paramMap.get('expenseId');
@@ -1646,8 +1650,8 @@ __webpack_require__.r(__webpack_exports__);
 class GroupHttpService {
     constructor(http) {
         this.http = http;
-        //public baseurl ='http://localhost:3000/api/v1/groups';
-        this.baseurl = 'http://api.gourav.tech/api/v1/groups';
+        this.baseurl = 'http://localhost:3000/api/v1/groups';
+        //public baseurl = 'http://api.gourav.tech/api/v1/groups';
         this.authToken = ng2_cookies_ng2_cookies__WEBPACK_IMPORTED_MODULE_2__["Cookie"].get('authToken');
     }
     getSingleGroupDetails(groupId) {
@@ -2284,7 +2288,7 @@ class LayoutComponent {
         //logout code start
         this.logout = () => {
             // remove user from local storage and set current user to null
-            localStorage.removeItem('user');
+            localStorage.removeItem('userInfo');
             ng2_cookies__WEBPACK_IMPORTED_MODULE_1__["Cookie"].delete('authToken');
             ng2_cookies__WEBPACK_IMPORTED_MODULE_1__["Cookie"].delete('_id');
             ng2_cookies__WEBPACK_IMPORTED_MODULE_1__["Cookie"].delete('userId');
@@ -2547,8 +2551,8 @@ class SocketService {
                 this.toastr.show(`${data.adminName} terminated your expense with expenseId:${data.expenseId}`);
             });
         };
-        //this.baseUrl = 'http://localhost:3000';
-        this.baseUrl = 'http://api.gourav.tech';
+        this.baseUrl = 'http://localhost:3000';
+        //this.baseUrl = 'http://api.gourav.tech';
         this.socket = socket_io_client__WEBPACK_IMPORTED_MODULE_2___default()(this.baseUrl);
     }
 }
@@ -2587,8 +2591,8 @@ __webpack_require__.r(__webpack_exports__);
 class UserHttpService {
     constructor(http) {
         this.http = http;
-        //public baseurl ='http://localhost:3000/api/v1/users';
-        this.baseurl = 'http://api.gourav.tech/api/v1/users';
+        this.baseurl = 'http://localhost:3000/api/v1/users';
+        //public baseurl = 'http://api.gourav.tech/api/v1/users';
         this.authToken = ng2_cookies_ng2_cookies__WEBPACK_IMPORTED_MODULE_4__["Cookie"].get('authToken');
         this.getUserInfoFromLocalstorage = () => {
             return JSON.parse(localStorage.getItem('userInfo'));
@@ -2649,6 +2653,8 @@ class UserHttpService {
         this.user = this.userSubject.asObservable();
     }
     get userValue() {
+        this.userSubject = new rxjs__WEBPACK_IMPORTED_MODULE_2__["BehaviorSubject"](JSON.parse(localStorage.getItem('userInfo')));
+        this.user = this.userSubject.asObservable();
         return this.userSubject.value;
     }
 }
