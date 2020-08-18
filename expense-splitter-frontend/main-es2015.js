@@ -1714,13 +1714,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var ng2_cookies__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(ng2_cookies__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var src_app_user_http_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/app/user-http.service */ "./src/app/user-http.service.ts");
 /* harmony import */ var src_app_group_http_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/app/group-http.service */ "./src/app/group-http.service.ts");
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
-/* harmony import */ var _shared_layout_layout_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../shared/layout/layout.component */ "./src/app/shared/layout/layout.component.ts");
-/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
-/* harmony import */ var _angular_material_form_field__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/material/form-field */ "./node_modules/@angular/material/__ivy_ngcc__/esm2015/form-field.js");
-/* harmony import */ var _angular_material_select__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/material/select */ "./node_modules/@angular/material/__ivy_ngcc__/esm2015/select.js");
-/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
-/* harmony import */ var _angular_material_core__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @angular/material/core */ "./node_modules/@angular/material/__ivy_ngcc__/esm2015/core.js");
+/* harmony import */ var ngx_toastr__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ngx-toastr */ "./node_modules/ngx-toastr/__ivy_ngcc__/fesm2015/ngx-toastr.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+/* harmony import */ var _shared_layout_layout_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../shared/layout/layout.component */ "./src/app/shared/layout/layout.component.ts");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
+/* harmony import */ var _angular_material_form_field__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/material/form-field */ "./node_modules/@angular/material/__ivy_ngcc__/esm2015/form-field.js");
+/* harmony import */ var _angular_material_select__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/material/select */ "./node_modules/@angular/material/__ivy_ngcc__/esm2015/select.js");
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+/* harmony import */ var _angular_material_core__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @angular/material/core */ "./node_modules/@angular/material/__ivy_ngcc__/esm2015/core.js");
+
 
 
 
@@ -1746,10 +1748,11 @@ function CreateGroupComponent_mat_option_23_Template(rf, ctx) { if (rf & 1) {
 } }
 //import{FormsModule} from '@angular/forms';
 class CreateGroupComponent {
-    constructor(userHttpService, groupHttpService, cookie, router) {
+    constructor(userHttpService, groupHttpService, cookie, toastr, router) {
         this.userHttpService = userHttpService;
         this.groupHttpService = groupHttpService;
         this.cookie = cookie;
+        this.toastr = toastr;
         this.router = router;
         this.getAllUsers = () => {
             this.userHttpService.getAllUsers().subscribe((apiresponse) => {
@@ -1767,8 +1770,14 @@ class CreateGroupComponent {
                 users: this.groupUsers
             };
             this.groupHttpService.createGroup(data).subscribe((apiresponse) => {
-                console.log('groupid: ' + apiresponse.data.groupId);
-                this.router.navigate(['/userdashboard']);
+                if (apiresponse == true) {
+                    this.toastr.warning(apiresponse.message);
+                }
+                else {
+                    console.log('groupid: ' + apiresponse.data.groupId);
+                    this.toastr.success(apiresponse.message);
+                    this.router.navigate(['/userdashboard']);
+                }
             });
         };
     }
@@ -1778,7 +1787,7 @@ class CreateGroupComponent {
         console.log('userId: ' + this.userId);
     }
 }
-CreateGroupComponent.ɵfac = function CreateGroupComponent_Factory(t) { return new (t || CreateGroupComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](src_app_user_http_service__WEBPACK_IMPORTED_MODULE_2__["UserHttpService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](src_app_group_http_service__WEBPACK_IMPORTED_MODULE_3__["GroupHttpService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](ng2_cookies__WEBPACK_IMPORTED_MODULE_1__["CookieService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"])); };
+CreateGroupComponent.ɵfac = function CreateGroupComponent_Factory(t) { return new (t || CreateGroupComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](src_app_user_http_service__WEBPACK_IMPORTED_MODULE_2__["UserHttpService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](src_app_group_http_service__WEBPACK_IMPORTED_MODULE_3__["GroupHttpService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](ng2_cookies__WEBPACK_IMPORTED_MODULE_1__["CookieService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](ngx_toastr__WEBPACK_IMPORTED_MODULE_4__["ToastrService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_5__["Router"])); };
 CreateGroupComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: CreateGroupComponent, selectors: [["app-create-group"]], features: [_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵProvidersFeature"]([ng2_cookies__WEBPACK_IMPORTED_MODULE_1__["CookieService"]])], decls: 29, vars: 5, consts: [["fxLayout", "column"], [1, "sample-app-content"], [1, "container"], [1, "row", 2, "text-align", "left"], [1, "col-md-12"], [3, "ngSubmit"], ["createGroupForm", "ngForm"], [1, "form-group"], ["type", "text", "name", "groupTitle", "placeholder", "enter Group title", "required", "", "autofocus", "", 1, "form-control", 3, "ngModel", "ngModelChange"], ["title", "ngModel"], ["type", "text", "name", "groupDescription", "placeholder", "enter Group Description", "required", "", "autofocus", "", 1, "form-control", 3, "ngModel", "ngModelChange"], ["description", "ngModel"], [1, "example-full-width", "text-capitalize"], ["placeholder", "Users:", "name", "groupUsers", "multiple", "", 3, "ngModel", "ngModelChange"], ["class", "text-capitalize", 3, "value", 4, "ngFor", "ngForOf"], ["type", "submit", 3, "disabled"], [1, "text-capitalize", 3, "value"]], template: function CreateGroupComponent_Template(rf, ctx) { if (rf & 1) {
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](0, "app-layout", 0);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](1, "br");
@@ -1839,7 +1848,7 @@ CreateGroupComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdef
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngForOf", ctx.usersList);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](4);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("disabled", !_r0.valid);
-    } }, directives: [_shared_layout_layout_component__WEBPACK_IMPORTED_MODULE_5__["LayoutComponent"], _angular_forms__WEBPACK_IMPORTED_MODULE_6__["ɵangular_packages_forms_forms_y"], _angular_forms__WEBPACK_IMPORTED_MODULE_6__["NgControlStatusGroup"], _angular_forms__WEBPACK_IMPORTED_MODULE_6__["NgForm"], _angular_forms__WEBPACK_IMPORTED_MODULE_6__["DefaultValueAccessor"], _angular_forms__WEBPACK_IMPORTED_MODULE_6__["RequiredValidator"], _angular_forms__WEBPACK_IMPORTED_MODULE_6__["NgControlStatus"], _angular_forms__WEBPACK_IMPORTED_MODULE_6__["NgModel"], _angular_material_form_field__WEBPACK_IMPORTED_MODULE_7__["MatFormField"], _angular_material_select__WEBPACK_IMPORTED_MODULE_8__["MatSelect"], _angular_common__WEBPACK_IMPORTED_MODULE_9__["NgForOf"], _angular_material_core__WEBPACK_IMPORTED_MODULE_10__["MatOption"]], styles: ["\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL2dyb3VwL2NyZWF0ZS1ncm91cC9jcmVhdGUtZ3JvdXAuY29tcG9uZW50LmNzcyJ9 */"] });
+    } }, directives: [_shared_layout_layout_component__WEBPACK_IMPORTED_MODULE_6__["LayoutComponent"], _angular_forms__WEBPACK_IMPORTED_MODULE_7__["ɵangular_packages_forms_forms_y"], _angular_forms__WEBPACK_IMPORTED_MODULE_7__["NgControlStatusGroup"], _angular_forms__WEBPACK_IMPORTED_MODULE_7__["NgForm"], _angular_forms__WEBPACK_IMPORTED_MODULE_7__["DefaultValueAccessor"], _angular_forms__WEBPACK_IMPORTED_MODULE_7__["RequiredValidator"], _angular_forms__WEBPACK_IMPORTED_MODULE_7__["NgControlStatus"], _angular_forms__WEBPACK_IMPORTED_MODULE_7__["NgModel"], _angular_material_form_field__WEBPACK_IMPORTED_MODULE_8__["MatFormField"], _angular_material_select__WEBPACK_IMPORTED_MODULE_9__["MatSelect"], _angular_common__WEBPACK_IMPORTED_MODULE_10__["NgForOf"], _angular_material_core__WEBPACK_IMPORTED_MODULE_11__["MatOption"]], styles: ["\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL2dyb3VwL2NyZWF0ZS1ncm91cC9jcmVhdGUtZ3JvdXAuY29tcG9uZW50LmNzcyJ9 */"] });
 /*@__PURE__*/ (function () { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵsetClassMetadata"](CreateGroupComponent, [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"],
         args: [{
@@ -1848,7 +1857,7 @@ CreateGroupComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdef
                 styleUrls: ['./create-group.component.css'],
                 providers: [ng2_cookies__WEBPACK_IMPORTED_MODULE_1__["CookieService"]]
             }]
-    }], function () { return [{ type: src_app_user_http_service__WEBPACK_IMPORTED_MODULE_2__["UserHttpService"] }, { type: src_app_group_http_service__WEBPACK_IMPORTED_MODULE_3__["GroupHttpService"] }, { type: ng2_cookies__WEBPACK_IMPORTED_MODULE_1__["CookieService"] }, { type: _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"] }]; }, null); })();
+    }], function () { return [{ type: src_app_user_http_service__WEBPACK_IMPORTED_MODULE_2__["UserHttpService"] }, { type: src_app_group_http_service__WEBPACK_IMPORTED_MODULE_3__["GroupHttpService"] }, { type: ng2_cookies__WEBPACK_IMPORTED_MODULE_1__["CookieService"] }, { type: ngx_toastr__WEBPACK_IMPORTED_MODULE_4__["ToastrService"] }, { type: _angular_router__WEBPACK_IMPORTED_MODULE_5__["Router"] }]; }, null); })();
 
 
 /***/ }),
